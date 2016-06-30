@@ -4,7 +4,12 @@
 
 #pragma once
 
+#if !defined(STANDALONE)
 #include "pal_types.h"
+#else
+#include "standalone_config.h"
+#endif
+
 #include <linux/netlink.h>
 
 enum class NetworkChangeKind : int32_t

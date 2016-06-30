@@ -4,7 +4,11 @@
 
 #pragma once
 
+#if !defined(STANDALONE)
 #include "pal_types.h"
+#else
+#include "standalone_config.h"
+#endif
 
 extern "C" const char* SystemNative_GetUnixName();
 
