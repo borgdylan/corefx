@@ -3,7 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 #include "pal_runtimeextensions.h"
+
+#if !defined(STANDALONE)
 #include "pal_types.h"
+#else
+#include "standalone_config.h"
+#endif
+
 #include <stdio.h>
 #include <sys/utsname.h>
 

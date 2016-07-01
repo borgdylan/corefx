@@ -2,7 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+#if !defined(STANDALONE)
 #include "pal_config.h"
+#include "pal_utilities.h"
+#else
+#include "standalone_config.h"
+#endif
 
 // These functions are only used for platforms which support
 // using sysctl to gather protocol statistics information.
@@ -11,7 +16,6 @@
 
 #if HAVE_TCP_VAR_H
 
-#include "pal_utilities.h"
 #include "pal_networkstatistics.h"
 #include "pal_errno.h"
 #include "pal_tcpstate.h"

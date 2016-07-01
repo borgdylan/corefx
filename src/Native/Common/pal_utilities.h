@@ -4,8 +4,10 @@
 
 #pragma once
 
+#if !defined(STANDALONE)
 #include "pal_types.h"
 #include "pal_config.h"
+#endif
 
 #include <assert.h>
 #include <errno.h>

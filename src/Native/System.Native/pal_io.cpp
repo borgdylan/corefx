@@ -2,10 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+#if !defined(STANDALONE)
 #include "pal_config.h"
+#include "pal_utilities.h"
+#else
+#include "standalone_config.h"
+#endif
+
 #include "pal_errno.h"
 #include "pal_io.h"
-#include "pal_utilities.h"
 
 #include <assert.h>
 #include <errno.h>
@@ -537,7 +542,7 @@ extern "C" int32_t SystemNative_FnMatch(const char* pattern, const char* path, F
 extern "C" int64_t SystemNative_LSeek(intptr_t fd, int64_t offset, SeekWhence whence)
 {
     int64_t result;
-    while (CheckInterrupted(result = lseek(ToFileDescriptor(fd), offset, whence)));
+    while (CheckInterrupted(result = lseek(ToFileDescriptor(fd), static_cast<__off_t>(offset), whence)));
     return result;
 }
 
@@ -641,7 +646,7 @@ extern "C" void* SystemNative_MMap(void* address,
     }
 
     // Use ToFileDescriptorUnchecked to allow -1 to be passed for the file descriptor, since managed code explicitly uses -1
-    void* ret = mmap(address, static_cast<size_t>(length), protection, flags, ToFileDescriptorUnchecked(fd), offset);
+    void* ret = mmap(address, static_cast<size_t>(length), protection, flags, ToFileDescriptorUnchecked(fd), static_cast<__off_t>(offset));
     if (ret == MAP_FAILED)
     {
         return nullptr;
@@ -763,7 +768,7 @@ extern "C" int64_t SystemNative_SysConf(SysConfName name)
 extern "C" int32_t SystemNative_FTruncate(intptr_t fd, int64_t length)
 {
     int32_t result;
-    while (CheckInterrupted(result = ftruncate(ToFileDescriptor(fd), length)));
+    while (CheckInterrupted(result = ftruncate(ToFileDescriptor(fd), static_cast<__off_t>(length))));
     return result;
 }
 
@@ -826,7 +831,7 @@ extern "C" int32_t SystemNative_PosixFAdvise(intptr_t fd, int64_t offset, int64_
 {
 #if HAVE_POSIX_ADVISE
     int32_t result;
-    while (CheckInterrupted(result = posix_fadvise(ToFileDescriptor(fd), offset, length, advice)));
+    while (CheckInterrupted(result = posix_fadvise(ToFileDescriptor(fd), static_cast<__off_t>(offset), static_cast<__off_t>(length), advice)));
     return result;
 #else
     // Not supported on this platform. Caller can ignore this failure since it's just a hint.
