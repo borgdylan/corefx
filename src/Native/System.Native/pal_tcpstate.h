@@ -4,11 +4,7 @@
 
 #pragma once
 
-#if !defined(STANDALONE)
-#include "pal_config.h"
-#else
 #include "standalone_config.h"
-#endif
 
 enum TcpState
 {

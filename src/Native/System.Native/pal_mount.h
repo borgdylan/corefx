@@ -4,11 +4,7 @@
 
 #pragma once
 
-#if !defined(STANDALONE)
-#include "pal_types.h"
-#else
 #include "standalone_config.h"
-#endif
 
 /**
  * Struct to describe the amount of free space and total space on a given mount point

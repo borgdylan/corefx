@@ -4,10 +4,6 @@
 
 #pragma once
 
-#if !defined(STANDALONE)
-#include "pal_types.h"
-#else
 #include "standalone_config.h"
-#endif
 
 extern "C" int32_t SystemNative_GetNodeName(char* version, int* capacity);

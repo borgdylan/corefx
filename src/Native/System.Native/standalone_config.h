@@ -6,10 +6,14 @@
 
 #pragma once
 
+//types -> the non-standalone build will include this header as well and also needs the types header.
 #if defined(STANDALONE)
-//types
 #include "../Common/pal_types.h"
+#else
+#include "pal_types.h"
+#endif
 
+#if defined(STANDALONE)
 //emulate pal_config by manually defining the defines that would be true on GNU/Linux
 #define PAL_UNIX_NAME "LINUX"
 #define HAVE_STAT64 1

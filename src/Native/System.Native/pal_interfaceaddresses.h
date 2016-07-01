@@ -5,12 +5,7 @@
 #pragma once
 
 #include "pal_maphardwaretype.h"
-
-#if !defined(STANDALONE)
-#include "pal_types.h"
-#else
 #include "standalone_config.h"
-#endif
 
 struct LinkLayerAddressInfo
 {

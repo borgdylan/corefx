@@ -4,11 +4,7 @@
 
 #pragma once
 
-#if !defined(STANDALONE)
-#include "pal_types.h"
-#else
 #include "standalone_config.h"
-#endif
 
 /**
  * snprintf is difficult to represent in C# due to the argument list, so the C# PInvoke

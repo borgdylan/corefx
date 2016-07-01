@@ -3,12 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #pragma once
-
-#if !defined(STANDALONE)
-#include "pal_types.h"
-#else
 #include "standalone_config.h"
-#endif
 
 /**
  * Error codes returned via ConvertErrno.

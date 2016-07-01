@@ -4,12 +4,7 @@
 
 #pragma once
 
-#if !defined(STANDALONE)
-#include "pal_types.h"
-#else
 #include "standalone_config.h"
-#endif
-
 #include "pal_errno.h"
 
 /**

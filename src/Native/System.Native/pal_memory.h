@@ -4,11 +4,7 @@
 
 #pragma once
 
-#if !defined(STANDALONE)
-#include "pal_types.h"
-#else
 #include "standalone_config.h"
-#endif
 
 /**
  * Fills memory with a set byte. Implemented as shim to memset(3).
