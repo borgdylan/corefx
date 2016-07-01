@@ -542,7 +542,7 @@ extern "C" int32_t SystemNative_FnMatch(const char* pattern, const char* path, F
 extern "C" int64_t SystemNative_LSeek(intptr_t fd, int64_t offset, SeekWhence whence)
 {
     int64_t result;
-    while (CheckInterrupted(result = lseek(ToFileDescriptor(fd), static_cast<__off_t>(offset), whence)));
+    while (CheckInterrupted(result = lseek64(ToFileDescriptor(fd), offset, whence)));
     return result;
 }
 
