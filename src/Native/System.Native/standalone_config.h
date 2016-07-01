@@ -10,6 +10,7 @@
 #if defined(STANDALONE)
 #include "../Common/pal_types.h"
 #else
+#include "pal_config.h"
 #include "pal_types.h"
 #endif
 
@@ -100,6 +101,11 @@
 #define _ARM64_
 #endif
 
-//utilities
+#endif
+
+//utilities -> the non-standalone build will include this header as well and also needs the utilities header.
+#if defined(STANDALONE)
 #include "../Common/pal_utilities.h"
+#else
+#include "pal_utilities.h"
 #endif

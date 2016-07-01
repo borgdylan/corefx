@@ -2,13 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-#if !defined(STANDALONE)
-#include "pal_config.h"
-#include "pal_types.h"
-#else
 #include "standalone_config.h"
-#endif
-
 #include "pal_runtimeinformation.h"
 #include <stdio.h>
 #include <sys/utsname.h>

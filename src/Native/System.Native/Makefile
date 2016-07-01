@@ -4,6 +4,6 @@ all: *.h *.cpp
 	g++ --shared -fPIC -std=c++11 -DSTANDALONE *.cpp -o libSystem.Native.so
 
 clean:
-	rm *.so
+	rm -f *.so
 
 .PHONY: all clean
