@@ -463,7 +463,9 @@ static bool InitializeSignalHandling()
     }
 
     // Finally, register our signal handlers
-    struct sigaction newAction = { .sa_flags = SA_RESTART | SA_SIGINFO };
+    struct sigaction newAction;
+    newAction.sa_flags = SA_RESTART | SA_SIGINFO;
+    
     sigemptyset(&newAction.sa_mask);
     int rv;
 

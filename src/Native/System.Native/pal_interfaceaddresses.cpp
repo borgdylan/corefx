@@ -54,17 +54,17 @@ extern "C" int32_t SystemNative_EnumerateInterfaceAddresses(IPv4AddressFound onI
             if (onIpv4Found != nullptr)
             {
                 // IP Address
-                IpAddressInfo iai = {
-                    .InterfaceIndex = interfaceIndex, .NumAddressBytes = NUM_BYTES_IN_IPV4_ADDRESS,
-                };
+                IpAddressInfo iai;
+                iai.InterfaceIndex = interfaceIndex;
+                iai.NumAddressBytes = NUM_BYTES_IN_IPV4_ADDRESS;
 
                 sockaddr_in* sain = reinterpret_cast<sockaddr_in*>(current->ifa_addr);
                 memcpy(iai.AddressBytes, &sain->sin_addr.s_addr, sizeof(sain->sin_addr.s_addr));
 
                 // Net Mask
-                IpAddressInfo maskInfo = {
-                    .InterfaceIndex = interfaceIndex, .NumAddressBytes = NUM_BYTES_IN_IPV4_ADDRESS,
-                };
+                IpAddressInfo maskInfo;
+                maskInfo.InterfaceIndex = interfaceIndex;
+                maskInfo.NumAddressBytes = NUM_BYTES_IN_IPV4_ADDRESS;
 
                 sockaddr_in* mask_sain = reinterpret_cast<sockaddr_in*>(current->ifa_netmask);
                 memcpy(maskInfo.AddressBytes, &mask_sain->sin_addr.s_addr, sizeof(mask_sain->sin_addr.s_addr));
@@ -76,9 +76,9 @@ extern "C" int32_t SystemNative_EnumerateInterfaceAddresses(IPv4AddressFound onI
         {
             if (onIpv6Found != nullptr)
             {
-                IpAddressInfo iai = {
-                    .InterfaceIndex = interfaceIndex, .NumAddressBytes = NUM_BYTES_IN_IPV6_ADDRESS,
-                };
+                IpAddressInfo iai;
+                iai.InterfaceIndex = interfaceIndex;
+                iai.NumAddressBytes = NUM_BYTES_IN_IPV6_ADDRESS;
 
                 sockaddr_in6* sain6 = reinterpret_cast<sockaddr_in6*>(current->ifa_addr);
                 memcpy(iai.AddressBytes, sain6->sin6_addr.s6_addr, sizeof(sain6->sin6_addr.s6_addr));
@@ -94,11 +94,10 @@ extern "C" int32_t SystemNative_EnumerateInterfaceAddresses(IPv4AddressFound onI
             {
                 sockaddr_ll* sall = reinterpret_cast<sockaddr_ll*>(current->ifa_addr);
 
-                LinkLayerAddressInfo lla = {
-                    .InterfaceIndex = interfaceIndex,
-                    .NumAddressBytes = sall->sll_halen,
-                    .HardwareType = MapHardwareType(sall->sll_hatype),
-                };
+                LinkLayerAddressInfo lla;
+                lla.InterfaceIndex = interfaceIndex;
+                lla.NumAddressBytes = sall->sll_halen;
+                lla.HardwareType = MapHardwareType(sall->sll_hatype);
 
                 memcpy(&lla.AddressBytes, &sall->sll_addr, sall->sll_halen);
                 onLinkLayerFound(current->ifa_name, &lla);
